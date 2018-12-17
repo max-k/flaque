@@ -1,7 +1,9 @@
+"""Setup module for flaque project"""
+
 from setuptools import setup, find_packages
 
-with open('requirements-test.txt') as test_require:
-    TEST_REQUIREMENTS = test_require.readlines()
+TEST_REQ = ['pytest']
+EXTRAS_REQ = {'test': TEST_REQ}
 
 setup(
     name='flaque',
@@ -14,9 +16,8 @@ setup(
     install_requires=[
         'click',
     ],
-    test_require=[
-        TEST_REQUIREMENTS
-    ],
+    test_require=TEST_REQ,
+    extra_require=EXTRAS_REQ,
     entry_points='''
         [console_scripts]
         flaque=flaque.__main__:main
