@@ -10,7 +10,7 @@ home-page = "https://github.com/max-k/flaque"
 requires = [
     'click',
 ]
-requires-python="3"
+requires-python=">=3.6,<4"
 description-file="README.rst"
 classifiers=[
     "Development Status :: 1 - Planning",
@@ -34,7 +34,7 @@ doc = ["sphinx"]
 #Documentation = "https://flaque.readthedocs.io/en/latest/"
 
 [tool.flit.scripts]
-flaque = "flaque:__main__:main"
+flaque = "flaque:__main__.main"
 
 [tool.tidypy]
 exclude = [
