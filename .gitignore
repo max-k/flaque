@@ -1,7 +1,9 @@
 *.pyc
-*.egg-info
 dist/
+flaque.egg-info
+.eggs/
 .tox/
 .mypy_cache/
+.pytest_cache/
 unittest.xml
 typing.xml
