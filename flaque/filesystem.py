@@ -4,7 +4,7 @@ from os import getcwd
 from os.path import join, realpath
 
 
-class Directory(object):
+class Directory():
     def __init__(self, path: str):
         self.path: str = path
 

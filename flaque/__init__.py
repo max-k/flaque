@@ -1,3 +1,5 @@
-"""AudioTool replacement to manage lossless albums and split/convert them to FLAC."""
+"""
+Tool to manage lossless albums splitting, tagging and FLAC conversion.
+"""
 
 __version__ = "0.1"

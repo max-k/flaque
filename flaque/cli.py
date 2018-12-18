@@ -23,10 +23,11 @@ CONTEXT_SETTINGS: Dict = dict(
 @click.argument("paths", nargs=-1, type=click.Path(exists=True))
 def cli(debug: bool, wait: int, type_: str,
         mp3: bool, paths: List[str]) -> None:
-    """Sanitize tags and convert any lossless format to flac.
+    """
+    Sanitize tags and convert any lossless format to flac.
 
-       \b
-       Supports FLAC, Monkey"s Audio, WavPack, TrueAudio,
-       Shorten and Wave (and maybe Alac in a near future).
+    \b
+    Supports FLAC, Monkey"s Audio, WavPack, TrueAudio,
+    Shorten and Wave (and maybe Alac in a near future).
     """
     algorithm.main(paths)

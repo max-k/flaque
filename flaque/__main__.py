@@ -3,5 +3,5 @@
 from .cli import cli
 
 
-def main() -> None:
-    cli(auto_envvar_prefix="FLAQUE")
+def main(*args, **kwargs) -> None:
+    cli(*args, **kwargs, auto_envvar_prefix="FLAQUE")  # noqa: @pylint
