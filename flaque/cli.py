@@ -15,13 +15,14 @@ CONTEXT_SETTINGS: Dict = dict(
 @click.option("-d", "--debug", is_flag=True, help="enable debug output")
 @click.option("-w", "--wait", default=0, show_default=True,
               help="time to wait before exiting")
-@click.option("-t", "--type", "type_", type=click.Choice(["track", "disc"]),
+@click.option("-t", "--type", "force_type",
+              type=click.Choice(["track", "disc"]),
               help="force found files to be tracks or discs")
 @click.option("-3", "--mp3", is_flag=True,
               help="use mp3 output format instead of flac")
 @click.version_option()
 @click.argument("paths", nargs=-1, type=click.Path(exists=True))
-def cli(debug: bool, wait: int, type_: str,
+def cli(debug: bool, wait: int, force_type: str,
         mp3: bool, paths: List[str]) -> None:
     """
     Sanitize tags and convert any lossless format to flac.
@@ -30,4 +31,4 @@ def cli(debug: bool, wait: int, type_: str,
     Supports FLAC, Monkey"s Audio, WavPack, TrueAudio,
     Shorten and Wave (and maybe Alac in a near future).
     """
-    algorithm.main(debug, wait, type_, mp3, paths)
+    algorithm.main(debug, wait, force_type, mp3, paths)

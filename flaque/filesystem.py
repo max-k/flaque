@@ -9,46 +9,59 @@ from .audio import Album
 
 class FileSystemObject():
     def __init__(self, path: str):
-        self._path: str = path
-        self._fullpath: str = ""
-        self._basename: str = basename(path)
+        self.__path: str = path
+        self.__fullpath: str = ""
+        self.__basename: str = basename(path)
+
+    @property
+    def path(self) -> str:
+        return self.__path
 
     @property
     def basename(self) -> str:
-        return self._basename
+        return self.__basename
 
     @property
     def full_path(self) -> str:
-        if not self._fullpath:
+        if not self.__fullpath:
             full_path: str = ""
-            if self._path.startswith("/"):
-                full_path = self._path
+            if self.__path.startswith("/"):
+                full_path = self.__path
             else:
-                full_path = join(getcwd(), self._path)
-            self._fullpath = realpath(full_path)
-        return self._fullpath
+                full_path = join(getcwd(), self.__path)
+            self.__fullpath = realpath(full_path)
+        return self.__fullpath
 
 
 class Directory(FileSystemObject):
-    def __init__(self, path: str):
+    def __init__(self, path: str, force_type: str):
         super().__init__(path)
-        self._scanned: bool = False
-        self._albums: List[Album] = []
+        self.__type: str = force_type
+        self.__scanned: bool = False
+        self.__albums: List[Album] = []
 
     @property
     def albums(self) -> List[Album]:
-        if not self._scanned:
-            self._albums = self._scan()
-        return self._albums
+        if not self.__scanned:
+            self.__albums = self._scan()
+        return self.__albums
 
     def _scan(self) -> List[Album]:
-        self._scanned = True
-        return self._albums
+        self.__scanned = True
+        return self.__albums
 
 
 class File(FileSystemObject):
     def __init__(self, path: str, directory: Directory):
         super().__init__(path)
-        self._directory = directory
-        self._ext = splitext(self.basename)[1]
-        self._size = getsize(self.full_path) / 1048576
+        self.__directory: Directory = directory
+        self.__ext: str = splitext(self.basename)[1]
+        self.__size: int = getsize(self.full_path) / 1048576
+
+    @property
+    def ext(self) -> str:
+        return self.__ext
+
+    @property
+    def size(self) -> int:
+        return self.__size

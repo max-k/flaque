@@ -4,11 +4,16 @@ from .metatags import Tags
 
 
 class Album():
-    def __init__(self, name):
+    def __init__(self, name: str):
         self.name: str = name
+        self.tags: Tags = self._save_tags()
 
-    def save_tags(self) -> Tags:
-        tags: Tags = Tags('title')
+    @property.setter('tags')
+    def _store_tags(self, tags: Tags) -> None:
+        self.tags = tags
+
+    def _save_tags(self) -> Tags:
+        tags: Tags = Tags(self.name)
         return tags
 
     def decode(self) -> None:
@@ -17,8 +22,5 @@ class Album():
     def split(self) -> None:
         pass
 
-    def encode(self) -> None:
-        pass
-
-    def tags(self) -> None:
+    def encode(self, mp3: bool) -> None:
         pass
