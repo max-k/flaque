@@ -30,4 +30,4 @@ def cli(debug: bool, wait: int, type_: str,
     Supports FLAC, Monkey"s Audio, WavPack, TrueAudio,
     Shorten and Wave (and maybe Alac in a near future).
     """
-    algorithm.main(paths)
+    algorithm.main(debug, wait, type_, mp3, paths)
