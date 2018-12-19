@@ -56,7 +56,7 @@ class File(FileSystemObject):
         super().__init__(path)
         self.__directory: Directory = directory
         self.__ext: str = splitext(self.basename)[1]
-        self.__size: int = getsize(self.full_path) / 1048576
+        self.__size: int = int(getsize(self.full_path) / 1048576)
 
     @property
     def ext(self) -> str:

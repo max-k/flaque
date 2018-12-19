@@ -14,7 +14,7 @@ def main(debug: bool, wait: int, force_type: str,
         if debug:
             print(directory.full_path)
         for album in directory.albums:
-            tags: Tags = album.save_tags()
+            tags: Tags = album.tags
             album.decode()
             album.split()
             album.encode(mp3)

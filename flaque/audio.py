@@ -5,11 +5,19 @@ from .metatags import Tags
 
 class Album():
     def __init__(self, name: str):
-        self.name: str = name
-        self.tags: Tags = self._save_tags()
+        self.__name: str = name
+        self.__tags: Tags = self._save_tags()
 
-    @property.setter('tags')
-    def _store_tags(self, tags: Tags) -> None:
+    @property
+    def name(self) -> str:
+        return self.__name
+
+    @property
+    def tags(self) -> Tags:
+        return self.__tags
+
+    @tags.setter
+    def tags(self, tags: Tags) -> None:
         self.tags = tags
 
     def _save_tags(self) -> Tags:
