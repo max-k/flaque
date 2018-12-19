@@ -58,6 +58,11 @@ disabled = [
     'D400', 'D401',
 ]
 
+[tool.tidy.pyflakes]
+disabled = [
+    'UnusedImport',
+]
+
 [tool.tidypy.pylint]
 disabled = [
     'missing-docstring',
