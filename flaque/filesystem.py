@@ -1,10 +1,10 @@
 # coding: utf-8
 
-from os import getcwd
+from os import getcwd, listdir
 from os.path import basename, getsize, join, realpath, splitext
-from typing import List
+from typing import Dict, List
 
-from .audio import Album
+from .formats import checker
 
 
 class FileSystemObject():
@@ -33,30 +33,12 @@ class FileSystemObject():
         return self.__fullpath
 
 
-class Directory(FileSystemObject):
-    def __init__(self, path: str, force_type: str):
-        super().__init__(path)
-        self.__type: str = force_type
-        self.__scanned: bool = False
-        self.__albums: List[Album] = []
-
-    @property
-    def albums(self) -> List[Album]:
-        if not self.__scanned:
-            self.__albums = self._scan()
-        return self.__albums
-
-    def _scan(self) -> List[Album]:
-        self.__scanned = True
-        return self.__albums
-
-
 class File(FileSystemObject):
-    def __init__(self, path: str, directory: Directory):
+    def __init__(self, path: str):
         super().__init__(path)
-        self.__directory: Directory = directory
         self.__ext: str = splitext(self.basename)[1]
         self.__size: int = int(getsize(self.full_path) / 1048576)
+        self.__format: Dict = checker(self.ext)
 
     @property
     def ext(self) -> str:
@@ -65,3 +47,19 @@ class File(FileSystemObject):
     @property
     def size(self) -> int:
         return self.__size
+
+    @property
+    def format(self) -> Dict:
+        return self.__format
+
+
+class Directory(FileSystemObject):
+    def __init__(self, path: str):
+        super().__init__(path)
+        self.__scanned: bool = False
+        self.__files: List[File] = [File(join(path, filename))
+                                    for filename in listdir(path)]
+
+    @property
+    def files(self) -> List[File]:
+        return self.__files

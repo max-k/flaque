@@ -9,6 +9,7 @@ author-email = "max-k@post.com"
 home-page = "https://github.com/max-k/flaque"
 requires = [
     'click',
+    'mutagen',
 ]
 requires-python=">=3.6,<4"
 description-file="README.rst"
