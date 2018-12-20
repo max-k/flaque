@@ -1,28 +1,24 @@
 # coding: utf-8
 
-from .metatags import Tags
+from typing import Dict
 
 
 class Album():
-    def __init__(self, name: str):
+    def __init__(self, name: str, tags: Dict):
         self.__name: str = name
-        self.__tags: Tags = self._save_tags()
+        self.__tags: Dict = tags
 
     @property
     def name(self) -> str:
         return self.__name
 
     @property
-    def tags(self) -> Tags:
+    def tags(self) -> Dict:
         return self.__tags
 
     @tags.setter
-    def tags(self, tags: Tags) -> None:
+    def tags(self, tags: Dict) -> None:
         self.tags = tags
-
-    def _save_tags(self) -> Tags:
-        tags: Tags = Tags(self.name)
-        return tags
 
     def decode(self) -> None:
         pass

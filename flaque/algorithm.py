@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from time import sleep
-from typing import List
+from typing import Dict, List
 
 from .analyze import analyzer
 from .audio import Album
@@ -15,9 +15,9 @@ def main(debug: bool, wait: int, force_type: str,
         directory: Directory = Directory(path)
         if debug:
             print(directory.full_path)
-        albums: List[Album] = analyzer(directory, force_type)
+        albums: Dict[str, Album] = analyzer(directory, force_type)
         for album in albums:
-            tags: Tags = album.tags
+            tags: Tags = albums[album].tags
             album.decode()
             album.split()
             album.encode(mp3)
