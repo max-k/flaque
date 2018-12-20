@@ -6,9 +6,13 @@ from typing import Dict, List
 
 from .formats import checker
 
+DANGEROUS_CHARS = ['"', '$']
+
 
 class FileSystemObject():
     def __init__(self, path: str):
+        for char in DANGEROUS_CHARS:
+            path = path.replace(char, '\\{}'.format(char))
         self.__path: str = path
         self.__fullpath: str = ""
         self.__basename: str = basename(path)
@@ -56,7 +60,6 @@ class File(FileSystemObject):
 class Directory(FileSystemObject):
     def __init__(self, path: str):
         super().__init__(path)
-        self.__scanned: bool = False
         self.__files: List[File] = [File(join(path, filename))
                                     for filename in listdir(path)]
 
